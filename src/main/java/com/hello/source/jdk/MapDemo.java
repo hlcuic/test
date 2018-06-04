@@ -27,6 +27,7 @@ public class MapDemo {
 		hashmap.put(null, "value");
 		//value 可以为null
 		hashmap.put("key", null);
+		
 	}
 	
 	/**
