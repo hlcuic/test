@@ -19,6 +19,7 @@ public class CommonUtils {
 					value = method.invoke(t, new Object[] {});
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
