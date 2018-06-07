@@ -12,48 +12,70 @@ import com.google.gson.Gson;
 
 @Component
 public class ShopeeLogReader extends Thread implements InitializingBean {
-	
+
 	private static final Log LOG = LogFactory.getLog(ShopeeLogReader.class);
-	
-	private File logFile;
-	
-	private long lastTimeFileSize; // 上次文件大小
-	
+
+	private static File logFile;
+
+	private static long lastTimeFileSize; // 上次文件大小
+
 	private String monitoringStr = "com.szmsd.action.shopee.OrderAction - J&T SHOPEE标准下单";
-	
+
 	private Gson gson = new Gson();
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.logFile = new File("d:/client.log");
 		this.start();
 	}
 
+	public static void main(String[] args) {
+		run1();
+	}
+
 	/**
 	 * 实时读取日志文件
 	 */
-	@SuppressWarnings("resource")
-	public void run() {
+	public static void run1() {
 		while (true) {
-			try {
-				RandomAccessFile randomFile = new RandomAccessFile(logFile, "r");
-				randomFile.seek(lastTimeFileSize);
-				String tmp = null;
-				while ((tmp = randomFile.readLine()) != null) {
-					tmp = new String(tmp.getBytes("ISO-8859-1"));
-					System.out.println(tmp);
-					shopeeOrderLog(tmp);
+			exec();
+		}
+
+	}
+
+	private static void exec() {
+		RandomAccessFile randomFile = null;
+		try {
+			logFile = new File("d:/client.log");
+			if(logFile.length()<lastTimeFileSize){
+				lastTimeFileSize = 0;
+			}
+			randomFile = new RandomAccessFile(logFile, "r");
+			randomFile.seek(lastTimeFileSize);
+			String tmp = null;
+			while ((tmp = randomFile.readLine()) != null) {
+				tmp = new String(tmp.getBytes("ISO-8859-1"));
+				System.out.println(tmp);
+				// shopeeOrderLog(tmp);
+			}
+			lastTimeFileSize = randomFile.length();
+		} catch (IOException e) {
+			LOG.error("", e);
+		} finally {
+			if (null != randomFile) {
+				try {
+					randomFile.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				lastTimeFileSize = randomFile.length();
-			} catch (IOException e) {
-				LOG.error("",e);
 			}
-			try {
-				Thread.sleep(500);
-				System.out.println("扫描...........");
-			} catch (InterruptedException e) {
-				LOG.error("",e);
-			}
+		}
+
+		try {
+			System.out.println("睡眠...........");
+			Thread.sleep(30000);
+		} catch (InterruptedException e) {
+			LOG.error("", e);
 		}
 	}
 
