@@ -12,6 +12,6 @@ public class TestValidateParamsByAnnotation {
 		Person person = new Person();
 		person.setId("1");
 		person.setName("tom");
-		ValidateUtils.doValidator(person);
+//		ValidateUtils.doValidator(person);
 	}
 }
