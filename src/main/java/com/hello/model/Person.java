@@ -3,7 +3,7 @@ package com.hello.model;
 
 import com.hello.annotation.NotNull;
 
-public class Person {
+public class Person extends Animal{
 
 	@NotNull(value = "编号不能为空!")
 	private String id;

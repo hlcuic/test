@@ -9,21 +9,39 @@ import java.util.List;
 
 import com.hello.annotation.NotNull;
 import com.hello.exception.CustBusinessException;
+import com.hello.model.Person;
 
 public class ValidateUtils {
 	
-	public static <T> void doValidator(T t){
-		Class<?> clazz = t.getClass();
-		Field[] fields = clazz.getDeclaredFields();
-		for (Field field : fields) {
-			NotNull notNull = field.getDeclaredAnnotation(NotNull.class);
-			if (null != notNull) {
-				Object value = getValue(t, field.getName());
-				if (!notNull(value)) {
-					throwExcpetion(notNull.value());
+	public static void main(String[] args) throws Exception {
+		Person per = new Person();
+//		per.setId("1");
+//		per.setName("jack");
+//		doValidator(per);
+		Object value1 = new Object();
+		Object value2 = new Object();
+		System.out.println(value1==value2);
+		System.out.println(value1.equals(value2));
+		System.out.println(value1.getClass().equals(value2.getClass()));
+//		System.out.println(per.getClass().getSuperclass().getSuperclass());
+	}
+	
+	public static <T> void doValidator(T t) throws Exception{
+		for(Class<?> clazz = t.getClass();clazz!=Object.class;clazz=clazz.getSuperclass()){
+			Field[] fields = clazz.getDeclaredFields();
+			for (Field field : fields) {
+				NotNull notNull = field.getDeclaredAnnotation(NotNull.class);
+				if (null != notNull) {
+					field.setAccessible(true);
+					Object value = field.get(t);
+//					Object value = getValue(t, field.getName());
+					if (!notNull(value)) {
+						throwExcpetion(notNull.value());
+					}
 				}
 			}
 		}
+		
 	}
 	
 	private static <T> Object getValue(T t,String name){
