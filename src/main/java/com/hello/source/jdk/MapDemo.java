@@ -1,19 +1,54 @@
 package com.hello.source.jdk;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.ibatis.io.Resources;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+
+import com.hello.model.DetailKey;
+
 public class MapDemo {
-	public static void main(String[] args) {
-		testHashMap();
-		testHashTable();
-		testConcurrenthashMap();
-		testTreeMap();
-		testLinkedhashmap();
+	public static void main(String[] args) throws IOException {
+//		testHashMap();
+//		testHashTable();
+//		testConcurrenthashMap();
+//		testTreeMap();
+//		testLinkedhashmap();
+		
+	}
+	
+	/**
+	 * 如果以自定义对象为key,需要重写hashcode和equals，两个对象equals相同那么hashcode一定
+	 * 相同，hashcode相同，equals不一定相等。
+	 */
+	public static void testHashCodeAndEquals(){
+		DetailKey key1 = new DetailKey("1");
+		DetailKey key2 = new DetailKey("1");
+		System.out.println(key1.hashCode());
+		System.out.println(key2.hashCode());
+	}
+	
+	/**
+	 * 测试Properties类
+	 * @throws IOException
+	 */
+	public static void testProperties() throws IOException{
+		Properties properties = new Properties();
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		Resource resource = resolver.getResource("classpath:application.properties");
+		properties.load(resource.getInputStream());
+		properties.forEach((key,value)->{
+			System.out.println(key+"="+value);
+		});
 	}
 	
 	/**
@@ -54,8 +89,10 @@ public class MapDemo {
 	 * 2:线程不安全
 	 */
 	private static void testTreeMap(){
-		Map<String,String> treemap = new TreeMap<>();
+		TreeMap<String,String> treemap = new TreeMap<>();
 		treemap.put("key", "value");
+		treemap.firstKey();
+		treemap.lastKey();
 	}
 	
 	private static void testLinkedhashmap(){

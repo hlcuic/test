@@ -27,9 +27,16 @@ public class TestCreateSqlSession extends BaseDAOTest{
 		String config = "mybatis-config.xml";
 		Reader reader = Resources.getResourceAsReader(config);
 		SqlSessionFactoryBuilder sb = new SqlSessionFactoryBuilder();
-		//创建sqlSessionFactory的过程中解析mybatis-config配置文件，将xml文件中mapper解析
+		/**
+		 * 创建sqlSessionFactory的过程中解析mybatis-config配置文件，
+		 * 将xml文件中mapper解析,将命名空间对应类class和对应的代理工厂对象缓存
+		 */
 		SqlSessionFactory sqlSessionFactory = sb.build(reader);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
+		/**
+		 * 根据类class从缓存中取出代理工厂对象，生成代理方法，当调用接口时，实际调用的
+		 * 代理方法invoke
+		 */
 		TestDAO testDAO = sqlSession.getMapper(TestDAO.class);
 		System.out.println(testDAO.listPersons());
 	}
