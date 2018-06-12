@@ -8,10 +8,11 @@ import com.hello.util.ValidateUtils;
 public class TestValidateParamsByAnnotation {
 	
 	@Test
-	public void testValidateParams(){
+	public void testValidateParams() throws Exception{
 		Person person = new Person();
 		person.setId("1");
 		person.setName("tom");
-//		ValidateUtils.doValidator(person);
+		ValidateUtils.doValidator(person);
 	}
+	
 }
