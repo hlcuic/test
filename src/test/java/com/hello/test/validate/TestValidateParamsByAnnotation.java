@@ -31,6 +31,7 @@ class A{
 	
 }
 
+
 interface B extends D{
 	
 }
