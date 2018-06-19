@@ -19,22 +19,30 @@ import com.hello.model.DetailKey;
 public class MapDemo {
 	public static void main(String[] args) throws IOException {
 //		testHashMap();
+//		testTreeMap();
 //		testHashTable();
 //		testConcurrenthashMap();
-//		testTreeMap();
 //		testLinkedhashmap();
-		
+//		testhashCodeAndEquals2();
 	}
 	
 	/**
 	 * 如果以自定义对象为key,需要重写hashcode和equals，两个对象equals相同那么hashcode一定
 	 * 相同，hashcode相同，equals不一定相等。
 	 */
-	public static void testHashCodeAndEquals(){
+	public static void testHashCodeAndEquals1(){
 		DetailKey key1 = new DetailKey("1");
 		DetailKey key2 = new DetailKey("1");
 		System.out.println(key1.hashCode());
 		System.out.println(key2.hashCode());
+	}
+	
+	public static void testhashCodeAndEquals2(){
+		String s1 = "hello hello";
+		String[] sarr = s1.split(" ");
+		System.out.println(s1.hashCode());
+		System.out.println(sarr[0].hashCode());
+		System.out.println(sarr[1].hashCode());
 	}
 	
 	/**

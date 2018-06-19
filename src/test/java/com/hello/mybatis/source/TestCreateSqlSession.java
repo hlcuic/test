@@ -2,6 +2,8 @@ package com.hello.mybatis.source;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -39,6 +41,7 @@ public class TestCreateSqlSession extends BaseDAOTest{
 		 */
 		TestDAO testDAO = sqlSession.getMapper(TestDAO.class);
 		System.out.println(testDAO.listPersons());
+//		System.out.println(new BigDecimal("1.2123232E3").intValue());
 	}
 	
 }
