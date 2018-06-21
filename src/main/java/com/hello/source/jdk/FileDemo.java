@@ -1,15 +1,44 @@
 package com.hello.source.jdk;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Arrays;
 
 public class FileDemo {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		File file = new File(".");
 		testPrintFileName(file);
 		testPrintFile(file);
+		testInputStream();
+	}
+	
+	private static void testInputStream() throws IOException{
+		//读取字符串
+		StringReader sr = new StringReader("helloworld!");
+		int i=0;
+		while((i=sr.read())!=-1){
+			System.out.print((char)i);
+		}
+		sr.close();
+		
+		System.out.println();
+		
+		//从内存中读取字节
+		DataInputStream dis = new DataInputStream(new ByteArrayInputStream("hello java!".getBytes()));
+		int j=0;
+		while((j=dis.read())!=-1){
+			System.out.print((char)j);
+		}
+		dis.close();
+		
+		System.out.println();
+		System.out.println(Arrays.toString("hello".getBytes("gbk")));
+		System.out.println(Arrays.toString("hello".getBytes("utf-8")));
 	}
 	
 	private static void testPrintFile(File file){
