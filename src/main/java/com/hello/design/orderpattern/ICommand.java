@@ -1,5 +1,5 @@
 package com.hello.design.orderpattern;
 
-public interface Command {
+public interface ICommand {
 	void execute();
 }

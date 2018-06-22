@@ -1,16 +1,16 @@
 package com.hello.design.orderpattern;
 
-public class LightUpCommand implements ICommand{
+public class LightDownCommand implements ICommand{
 	
 	Light light;
 	
-	LightUpCommand(Light light){
+	LightDownCommand(Light light){
 		this.light = light;
 	}
-	
+
 	@Override
 	public void execute() {
-		light.on();
+		light.down();
 	}
 
 }

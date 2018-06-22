@@ -2,9 +2,9 @@ package com.hello.design.orderpattern;
 
 public class SimpleControl {
 	
-	Command command;
+	ICommand command;
 	
-	public void setCommand(Command command){
+	public void setCommand(ICommand command){
 		this.command = command;
 	}
 	
