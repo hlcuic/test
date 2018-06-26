@@ -3,14 +3,52 @@ package com.hello.source.jdk;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeSet;
 
 public class ListDemo {
 	public static void main(String[] args) {
-		testArrayList();
-		testLinkedList();
-		testHashSet();
-		testTreeSet();
+//		testArrayList();
+//		testLinkedList();
+//		testHashSet();
+//		testTreeSet();
+//		testQueue();
+		testStack();
+	}
+	
+	/**
+	 * 队列，先进先出
+	 */
+	private static void testQueue(){
+		Queue<String>  queue = new LinkedList<String>();
+		queue.add("1");
+		queue.add("2");
+		queue.add("3");
+		queue.add("4");
+		queue.add("5");
+		int j = queue.size();
+		for(int i=0;i<j;i++){
+			System.out.print(queue.poll());
+		}
+	}
+	
+	/**
+	 * 栈结构，先进后出
+	 */
+	private static void testStack(){
+		Stack<String> stack = new Stack<String>();
+		stack.add("aaa");
+		stack.add("bbb");
+		stack.add("ccc");
+		stack.add("ddd");
+		stack.add("fff");
+		int length = stack.size();
+		for(int i=0;i<length;i++){
+			String s = stack.pop();
+			System.out.println(s);
+		}
+		
 	}
 
 	/**
