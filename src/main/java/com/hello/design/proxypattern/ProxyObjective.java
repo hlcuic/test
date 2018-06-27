@@ -9,7 +9,7 @@ public class ProxyObjective implements IObjective{
 	}
 	
 	private void before(){
-		
+		System.out.println("before.........");
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class ProxyObjective implements IObjective{
 	}
 	
 	private void after(){
-		
+		System.out.println("after.........");
 	}
 	
 	
