@@ -13,4 +13,11 @@ public class LightUpCommand implements ICommand{
 		light.on();
 	}
 
+	@Override
+	public void undo() {
+		light.down();
+	}
+	
+	
+
 }

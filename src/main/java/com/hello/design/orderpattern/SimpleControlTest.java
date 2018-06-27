@@ -7,8 +7,10 @@ public class SimpleControlTest {
 		ICommand commandup = new LightUpCommand(light);
 		control.setCommand(commandup);
 		control.pressButton();
+		control.undo();
 		ICommand commanddown = new LightDownCommand(light);
 		control.setCommand(commanddown);
 		control.pressButton();
+		control.undo();
 	}
 }

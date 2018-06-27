@@ -13,4 +13,9 @@ public class LightDownCommand implements ICommand{
 		light.down();
 	}
 
+	@Override
+	public void undo() {
+		light.on();
+	}
+
 }

@@ -11,4 +11,8 @@ public class SimpleControl {
 	public void pressButton(){
 		command.execute();
 	}
+	
+	public void undo(){
+		command.undo();
+	}
 }
