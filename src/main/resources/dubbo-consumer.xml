@@ -6,8 +6,8 @@
    
     <dubbo:application name="demo-consumer"/>
     
-    <dubbo:registry address="multicast://127.0.0.1:1234"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     
-    <dubbo:reference id="demoService" interface="com.alibaba.dubbo.demo.DemoService"/>
+    <dubbo:reference id="demoService" interface="com.hlcui.dubbo.server.DubboDemoService"/>
     
 </beans>
