@@ -8,15 +8,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hello.dao.TestDAO;
 import com.hello.model.Person;
+import com.hlcui.dubbo.server.DubboDemoService;
 
 @RestController
 public class TestController {
 
 	@Autowired
 	private TestDAO dao;
+	
+	@Autowired
+	private DubboDemoService demoService;
 
 	@GetMapping("/helloworld")
 	public String helloworld() {
+		return demoService.sayHello("xiaoming");
+	}
+	
+	private String queryDB(){
 		List<Person> persons = dao.listPersons();
 		StringBuilder sb = new StringBuilder();
 		persons.forEach(p -> {
