@@ -1,5 +1,6 @@
 package com.hello.kafka.consumer;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,11 +10,16 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.hlcui.model.Person;
 
 public class KafkaReceiver {
 
-	private final Consumer<String, String> kafkaConsumer;
+	private final Consumer<String, Object> kafkaConsumer;
 
 	public final static String TOPIC = "JAVA_TOPIC";
 
@@ -21,7 +27,7 @@ public class KafkaReceiver {
 		kafkaConsumer = createKafkaConsumer();
 	}
 
-	private Consumer<String, String> createKafkaConsumer() {
+	private Consumer<String, Object> createKafkaConsumer() {
 		Properties props = new Properties();
 		props.put("bootstrap.servers", "localhost:9092");
 		props.put("group.id", "1");
@@ -31,26 +37,31 @@ public class KafkaReceiver {
 		props.put("max.poll.records", 1000);
 		props.put("auto.offset.reset", "earliest");
 		props.put("key.deserializer", StringDeserializer.class.getName());
-		props.put("value.deserializer", StringDeserializer.class.getName());
-		Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(props);
+		props.put("value.deserializer", ByteArrayDeserializer.class.getName());
+		Consumer<String, Object> kafkaConsumer = new KafkaConsumer<>(props);
 		return kafkaConsumer;
 	}
 
-	private void consumer() {
+	private void consumer() throws JsonSyntaxException, UnsupportedEncodingException {
+		Gson gson = new Gson();
 		Collection<String> coll = new ArrayList<>();
 		coll.add(TOPIC);
 		kafkaConsumer.subscribe(coll);
 		while (true) {
 			//1次从kafka服务器拉取1000条数据
-			ConsumerRecords<String, String> records = kafkaConsumer.poll(1000);
-			for (Iterator<ConsumerRecord<String, String>> iter = records.iterator(); iter.hasNext();) {
-				ConsumerRecord<String, String> record = iter.next();
-				System.out.println(record.key() + " , " + record.value());
+			ConsumerRecords<String, Object> records = kafkaConsumer.poll(1000);
+			for (Iterator<ConsumerRecord<String, Object>> iter = records.iterator(); iter.hasNext();) {
+				ConsumerRecord<String, Object> record = iter.next();
+				byte[] data = (byte[])record.value();
+				String ss = new String(data,"UTF-8");
+				Person person = gson.fromJson(ss,Person.class);
+				System.out.println(person);
+				//System.out.println(record.key() + " , " + record.value());
 			}
 		}
 	}
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws JsonSyntaxException, UnsupportedEncodingException {
 		new KafkaReceiver().consumer();
 	}
 }
