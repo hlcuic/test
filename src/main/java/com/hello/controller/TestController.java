@@ -21,7 +21,8 @@ public class TestController {
 
 	@GetMapping("/helloworld")
 	public String helloworld() {
-		return demoService.sayHello("xiaoming");
+		return "helloworld!";
+//		return demoService.sayHello("xiaoming");
 	}
 	
 	private String queryDB(){

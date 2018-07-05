@@ -29,14 +29,19 @@ public class KafkaReceiver {
 
 	private Consumer<String, Object> createKafkaConsumer() {
 		Properties props = new Properties();
+		//kafka集群服务列表
 		props.put("bootstrap.servers", "localhost:9092");
+		//分组，不同的分组可以重复消费同一个topic的数据
 		props.put("group.id", "1");
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
 		props.put("session.timeout.ms", "30000");
+		//从kafka服务器每次拉取数据最大量
 		props.put("max.poll.records", 1000);
 		props.put("auto.offset.reset", "earliest");
+		//反序列化key格式
 		props.put("key.deserializer", StringDeserializer.class.getName());
+		//反序列化value格式
 		props.put("value.deserializer", ByteArrayDeserializer.class.getName());
 		Consumer<String, Object> kafkaConsumer = new KafkaConsumer<>(props);
 		return kafkaConsumer;

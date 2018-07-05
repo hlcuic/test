@@ -2,8 +2,6 @@ package com.hello.mybatis.source;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -36,8 +34,8 @@ public class TestCreateSqlSession extends BaseDAOTest{
 		SqlSessionFactory sqlSessionFactory = sb.build(reader);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		/**
-		 * 根据类class从缓存中取出代理工厂对象，生成代理方法，当调用接口时，实际调用的
-		 * 代理方法invoke
+		 * 根据类class从缓存中取出代理工厂对象，newInstance()生成代理对象，当调用接口时，实际调用的
+		 * 代理对象方法invoke
 		 */
 		TestDAO testDAO = sqlSession.getMapper(TestDAO.class);
 		System.out.println(testDAO.listPersons());
