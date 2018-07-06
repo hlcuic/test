@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hello.dao.TestDAO;
 import com.hello.model.Person;
+import com.hello.proxy.jdk.Iwelcome;
 import com.hlcui.dubbo.server.DubboDemoService;
 
 @RestController
@@ -17,10 +18,14 @@ public class TestController {
 	private TestDAO dao;
 	
 	@Autowired
-	private DubboDemoService demoService;
+	private Iwelcome welcome;
+	
+//	@Autowired
+//	private DubboDemoService demoService;
 
 	@GetMapping("/helloworld")
 	public String helloworld() {
+		welcome.sayHello();
 		return "helloworld!";
 //		return demoService.sayHello("xiaoming");
 	}

@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hello.dao.TestDAO;
+import com.hello.proxy.jdk.Iwelcome;
 
 public class TestCreateSpringContext {
 	public static void main(String[] args) {
@@ -13,9 +14,12 @@ public class TestCreateSpringContext {
 		ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 		
 		//从注册map中取出beanDefinition对象
-		TestDAO contr = (TestDAO) ac.getBean("testDAO");
-		System.out.println(contr.listPersons());
-		
+//		TestDAO contr = (TestDAO) ac.getBean("testDAO");
+//		System.out.println(contr.listPersons());
+		Iwelcome wel = (Iwelcome) ac.getBean("welcome");
+		wel.sayHello();
+		wel.sayBye();
+		wel.test();
 	}
 	
 }

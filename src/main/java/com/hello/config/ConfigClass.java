@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-@Configuration
+//@Configuration
 public class ConfigClass implements EnvironmentAware {
 	
 	private Environment environment;
