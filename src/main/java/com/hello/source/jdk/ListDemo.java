@@ -2,6 +2,7 @@ package com.hello.source.jdk;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -12,9 +13,10 @@ public class ListDemo {
 //		testArrayList();
 //		testLinkedList();
 //		testHashSet();
+		testLinkedHashSet();
 //		testTreeSet();
 //		testQueue();
-		testStack();
+//		testStack();
 	}
 	
 	/**
@@ -94,7 +96,24 @@ public class ListDemo {
 		HashSet<String> set = new HashSet<>();
 		//调用map的put方法
 		set.add("1");
-		set.addAll(new ArrayList<>());
+		set.add("b");
+		set.add("3");
+		set.add("2");
+		set.add("a");
+		System.out.println(set);
+		//输入：[1, a, b, 2, 3]
+	}
+	
+	private static void testLinkedHashSet() {
+		LinkedHashSet<String> set = new LinkedHashSet<>();
+		//调用map的put方法
+		set.add("1");
+		set.add("b");
+		set.add("3");
+		set.add("2");
+		set.add("a");
+		System.out.println(set);
+		//输出结果：去重、输入和输出一致[1, b, 3, 2, a]
 	}
 
 	/**
