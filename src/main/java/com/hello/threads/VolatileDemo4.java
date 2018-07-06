@@ -1,8 +1,6 @@
 package com.hello.threads;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 解决方式3：使用automInteger
