@@ -15,24 +15,15 @@ public class Consumer implements Runnable {
 		while (true) {
 
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			if (queue.size() == 0) {
-				try {
-					queue.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}else{
-				String s = queue.poll();
-				System.out.println("消费： " + s);
-			}
-			
-
+			String s = queue.poll();
+			System.out.println("消费： " + s);
 		}
+
 	}
 
 }

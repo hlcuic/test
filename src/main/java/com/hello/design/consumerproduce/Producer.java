@@ -6,10 +6,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Producer implements Runnable {
 
 	private Queue<String> queue;
+	
+	private AtomicInteger atomicInteger;
 
-	private AtomicInteger atomicInteger = new AtomicInteger();
-
-	public Producer(Queue<String> queue) {
+	public Producer(Queue<String> queue,AtomicInteger atomicInteger) {
+		this.atomicInteger = atomicInteger;
 		this.queue = queue;
 	}
 
@@ -19,25 +20,15 @@ public class Producer implements Runnable {
 		while (true) {
 
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-				if (queue.size() > 10) {
-					try {
-						queue.notifyAll();
-						queue.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				int i;
-				System.out.println("生产: "+(i=atomicInteger.get()));
-				queue.offer(i + "");
-			}
-			
-
+			int i= atomicInteger.getAndIncrement();
+			System.out.println("生产: " + i );
+			queue.offer(i + "");
 		}
+
 	}
 
 }
