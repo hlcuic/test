@@ -14,13 +14,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-//@Configuration
+@Configuration
 public class ConfigClass implements EnvironmentAware {
-	
+
 	private Environment environment;
-	
-	@Bean(name="helloDataSource")
-	public BasicDataSource createBasicDataSource(){
+
+	@Bean(name = "helloDataSource")
+	public BasicDataSource createBasicDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(environment.getProperty("driverClassName"));
 		dataSource.setUrl(environment.getProperty("url"));
@@ -28,29 +28,29 @@ public class ConfigClass implements EnvironmentAware {
 		dataSource.setPassword(environment.getProperty("password"));
 		return dataSource;
 	}
-	
-	@Bean(name="helloSqlSessionFactoryBean")
-	public SqlSessionFactory createSqlSessionFactoryBean() throws Exception{
+
+	@Bean(name = "helloSqlSessionFactoryBean")
+	public SqlSessionFactory createSqlSessionFactoryBean() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(createBasicDataSource());
 		sqlSessionFactoryBean.setMapperLocations(getResource());
 		return sqlSessionFactoryBean.getObject();
 	}
-	
+
 	@Bean
-	public MapperScannerConfigurer createMapperScannerConfigurer() throws Exception{
+	public MapperScannerConfigurer createMapperScannerConfigurer() throws Exception {
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setBasePackage("com.hello.dao");
 		mapperScannerConfigurer.setSqlSessionFactoryBeanName("helloSqlSessionFactoryBean");
 		return mapperScannerConfigurer;
 	}
-	
-	private Resource[] getResource() throws IOException{
+
+	private Resource[] getResource() throws IOException {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		String mapLocation = environment.getProperty("mapLocation");
 		return resolver.getResources(mapLocation);
 	}
-	
+
 	@Override
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;

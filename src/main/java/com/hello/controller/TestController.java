@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hello.dao.TestDAO;
 import com.hello.model.Person;
 import com.hello.proxy.jdk.Iwelcome;
-import com.hlcui.dubbo.server.DubboDemoService;
+import com.hello.transaction.TransactionDemo;
 
 @RestController
 public class TestController {
@@ -17,15 +17,19 @@ public class TestController {
 	@Autowired
 	private TestDAO dao;
 	
+//	@Autowired
+//	private Iwelcome welcome;
+	
 	@Autowired
-	private Iwelcome welcome;
+	private TransactionDemo demo;
 	
 //	@Autowired
 //	private DubboDemoService demoService;
 
 	@GetMapping("/helloworld")
 	public String helloworld() {
-		welcome.sayHello();
+		demo.testTransaction();
+//		welcome.sayHello();
 		return "helloworld!";
 //		return demoService.sayHello("xiaoming");
 	}

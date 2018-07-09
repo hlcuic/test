@@ -8,4 +8,9 @@
 		select * from test.person
 	</select>
 	
+	<insert id="add" parameterType="com.hello.model.Person">
+		insert into test.person(name,salary,mgr)
+		values(#{name},#{salary},#{mgr})
+	</insert>
+	
 </mapper>
