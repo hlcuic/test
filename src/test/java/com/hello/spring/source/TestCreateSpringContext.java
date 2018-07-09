@@ -6,6 +6,7 @@ import org.springframework.test.context.transaction.TestTransaction;
 
 import com.hello.dao.TestDAO;
 import com.hello.proxy.jdk.Iwelcome;
+import com.hello.transaction.TransDemo;
 import com.hello.transaction.TransactionDemo;
 
 public class TestCreateSpringContext {
@@ -22,8 +23,8 @@ public class TestCreateSpringContext {
 //		wel.sayHello();
 //		wel.sayBye();
 //		wel.test();
-		TransactionDemo testTransaction =  (TransactionDemo) ac.getBean("transactionDemo");
-		testTransaction.testTransaction();
+		TransDemo testTransaction =  (TransDemo) ac.getBean("transDemo");
+		testTransaction.testTrans();
 	}
 	
 }

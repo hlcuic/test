@@ -13,4 +13,8 @@
 		values(#{name},#{salary},#{mgr})
 	</insert>
 	
+	<update id="update" parameterType="com.hello.model.Person">
+		update test.person set name = #{name} where id = #{id}
+	</update>
+	
 </mapper>
