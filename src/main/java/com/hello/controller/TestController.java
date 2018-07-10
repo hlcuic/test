@@ -28,7 +28,7 @@ public class TestController {
 
 	@GetMapping("/helloworld")
 	public String helloworld() {
-		demo.testTransaction();
+//		demo.testTransaction();
 //		welcome.sayHello();
 		return "helloworld!";
 //		return demoService.sayHello("xiaoming");
