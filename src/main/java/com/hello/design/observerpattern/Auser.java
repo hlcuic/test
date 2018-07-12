@@ -12,7 +12,7 @@ public class Auser implements Observer {
 
 	@Override
 	public void update(String msg) {
-		this.msg = msg;
+		this.msg = msg;  
 		System.out.println("用户："+name+" 收到消息  "+ this.msg);
 	}
 
