@@ -1,4 +1,4 @@
-package com.hello.design.orderpattern;
+package com.hello.design.commandpattern;
 
 import java.util.LinkedList;
 import java.util.Queue;
