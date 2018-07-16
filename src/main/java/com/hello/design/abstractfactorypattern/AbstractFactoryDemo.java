@@ -19,4 +19,5 @@ public class AbstractFactoryDemo {
 		circle.draw();
 		
 	}
+	
 }
