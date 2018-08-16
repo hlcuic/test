@@ -41,30 +41,25 @@ public class CqEngineService {
 		}
     };
     
-    //ʹ��query  
     public String test1()  
     {  
         StringBuffer sbBuffer=new StringBuffer();  
         IndexedCollection<Car> cars = new ConcurrentIndexedCollection<Car>();  
-        //��Ӷ���  
         cars.add(new Car(1, "great ford focus", "great condition, low mileage", Arrays.asList("spare tyre", "sunroof")));  
         cars.add(new Car(2, "ford taurus", "dirty and unreliable, flat tyre", Arrays.asList("spare tyre", "radio")));  
         cars.add(new Car(3, "honda civic", "has a flat tyre and high mileage", Arrays.asList("radio")));  
         cars.add(new Car(4, "honda civic", "has a flat tyre and high mileage", Arrays.asList("radio")));  
         cars.add(new Car(5, "honda civic", "has a flat tyre and high mileage", Arrays.asList("radio")));  
         
-        //�������  
         cars.addIndex(NavigableIndex.onAttribute(Car_ID));  
         cars.addIndex(SuffixTreeIndex.onAttribute(DESCRIPTION));
         
         //cars.retrieve(equal(Car_ID,4)).uniqueResult().setCarId(10);
         //cars.remove(cars.retrieve(equal(Car_ID,4)).uniqueResult());
         
-        //������ѯ  
         //Query<Car> query1 =  and(startsWith(DESCRIPTION, "great"),lessThan(Car_ID, 4)); 
         //Query<Car> query1 = all(Car.class);
         //orderBy(descending(Car_ID));
-        //��ȡ��ѯ���  
         //ResultSet<Car> result=cars.retrieve(query1,queryOptions(orderBy(descending(Car_ID))));  
         ResultSet<Car> result=cars.retrieve(and(startsWith(DESCRIPTION, "great"),lessThan(Car_ID, 4)));
          if(result.isNotEmpty()){
