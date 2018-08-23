@@ -5,8 +5,16 @@
 <mapper namespace="com.hello.dao.TestDAO">
 
 	<select id="listPersons" resultType="com.hello.model.Person">
-		select * from test.person
+		select name,sum(salary)as salary from test.person group by name
 	</select>
+	
+	<insert id="addList" parameterType="java.util.List">
+		insert into test.person(name,salary,mgr)
+		values
+		<foreach collection="list" item="person" separator=",">
+   			(#{person.name},#{person.salary},#{person.mgr})
+    	</foreach>
+	</insert>
 	
 	<insert id="add" parameterType="com.hello.model.Person">
 		insert into test.person(name,salary,mgr)

@@ -14,6 +14,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import com.alibaba.dubbo.common.utils.StringUtils;
+
 @Configuration
 public class ConfigClass implements EnvironmentAware {
 
@@ -48,6 +50,9 @@ public class ConfigClass implements EnvironmentAware {
 	private Resource[] getResource() throws IOException {
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		String mapLocation = environment.getProperty("mapLocation");
+		if(StringUtils.isBlank(mapLocation)){
+			mapLocation = "classpath:com/hello/mapping/*.xml";
+		}
 		return resolver.getResources(mapLocation);
 	}
 

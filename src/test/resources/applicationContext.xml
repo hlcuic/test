@@ -17,12 +17,11 @@
 		http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		">
 
-	<!-- <context:annotation-config/> -->
+	<context:annotation-config/>
 
 	<context:component-scan base-package="com.hello" />
 	<aop:aspectj-autoproxy proxy-target-class="false"/>
 	<bean id="welcome" class="com.hello.proxy.jdk.WelcomeImpl"></bean>
-	<bean  class="com.hello.proxy.jdk.TestAspect"></bean>
 	
 	<!--引入配置文件中数据库参数 -->
 	<util:properties id="jdbcProperties" location="classpath:db.properties" />
