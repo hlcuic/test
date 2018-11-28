@@ -7,11 +7,11 @@
        					   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
        					   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
    	
-    <!-- <dubbo:application name="demo-consumer"/>
+    <dubbo:application name="demo-consumer"/>
     
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     
-    <dubbo:reference id="demoService" interface="com.hlcui.dubbo.server.DubboDemoService"/> -->
+    <dubbo:reference id="demoService" interface="com.hlcui.dubbo.server.DubboDemoService"/>
     
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
 	<bean id="transactionManager"
@@ -20,6 +20,6 @@
 	</bean>-->
 	
 	<!-- 声明使用注解式事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!--<tx:annotation-driven transaction-manager="transactionManager" /> -->
 	
 </beans>

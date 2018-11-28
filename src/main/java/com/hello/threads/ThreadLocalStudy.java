@@ -5,11 +5,27 @@ import java.util.Map;
 
 public class ThreadLocalStudy {
 
-	private ThreadLocal<Map<String, String>> threadlocal = new ThreadLocal<Map<String, String>>() {
+	public static ThreadLocal<Map<String, String>> threadlocal = new ThreadLocal<Map<String, String>>() {
 		protected Map<String, String> initialValue() {
 			return new HashMap<>();
 		}
 	};
+	
+	public static void add(String key,String value){
+		threadlocal.get().put(key,value);
+	}
+	
+	public static String get(String key){
+		return threadlocal.get().get(key);
+	}
+	
+	public static void print(){
+		System.out.println(threadlocal.get());
+	}
+	
+	public static void clear(){
+		threadlocal.get().clear();
+	}
 
 	public static void main(String[] args) {
 		Map<Long,Thread> threadMap = new HashMap<>();

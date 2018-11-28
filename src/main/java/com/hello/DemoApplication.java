@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @SpringBootApplication
-//@ImportResource("dubbo-consumer.xml")
+@ImportResource("classpath:dubbo-consumer.xml")
 public class DemoApplication {
 
 	public static void main(String[] args) {
